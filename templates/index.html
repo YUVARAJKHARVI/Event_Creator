@@ -1,0 +1,387 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>OnBusiness</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    
+
+		<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+	 
+		<section class="ftco-section">
+			<div class="container" id="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						
+						<div class="head">
+							
+							<h1 class=" mb-5"><span class="txt--gradient-blue">Trade Your Dreams</span></h1>
+							{% if logged  %}
+							<h3 id="exam" class="txt--gradient-blue" align="right" >{{logged}}</h3>
+							<p align="right"><a style="color: red;" href="log_out">logout</a></p>
+							{% endif%}
+						</div>
+						
+					</div>
+					
+					<div class="col-md-12">
+						<div class="featured-carousel owl-carousel">
+							<div class="item">
+								<div class="work-wrap d-md-flex">
+									<div class="img order-md-last" style="background-image: url(../static/images/1267556\ \(1\).jpg);"></div>
+									<div class="text text-left text-lg-right p-4 px-xl-5 d-flex align-items-center">
+										<div class="desc w-100">
+											<h2 class="mb-4">Trading <br>Name</h2>
+											<p class="h5">Call: 987654321</p>
+											<p class="h5 mb-4">Email Address: email@info.com</p>
+											<div class="row justify-content-end">
+												<div class="col-xl-8">
+													<p style="color: white;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+												</div>
+											</div>
+											<p>
+												<div  class="btn btn-outline-dark mb-2 py-3 px-4">01</div>
+												{% if logged  %}
+												<button type="button" id="btns" onclick="location.href='my_idea'" class="btn btn-dark mb-2 py-3 px-4">My Ideas</button>
+												{% else%}
+												<button type="button" id="btns" onclick="location.href='signin'" class="btn btn-dark mb-2 py-3 px-4">Login</button>
+												{% endif%}
+												<!--<a   href='search' class="btn btn-dark mb-2 py-3 px-4">Search</a>-->
+
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="work-wrap d-md-flex">
+									<div class="img order-md-last" style="background-image: url(../static/images/wallpapertip_cryptocurrency-wallpaper_2376926.jpg);"></div>
+									<div class="text text-left text-lg-right p-4 px-xl-5 d-flex align-items-center">
+										<div class="desc w-100">
+											<h2 class="mb-4">Trading <br>Name</h2>
+											<p class="h5">Call: 987654321</p>
+											<p class="h5 mb-4">Email Address: email@info.com</p>
+											<div class="row justify-content-end">
+												<div class="col-xl-8">
+													<p style="color: white;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+												</div>
+											</div>
+											<p>
+												<div  class="btn btn-outline-dark mb-2 py-3 px-4">02</div>
+												{% if logged  %}
+												<button type="button" id="btns" onclick="location.href='my_idea'" class="btn btn-dark mb-2 py-3 px-4">My Ideas</button>
+												{% else%}
+												<button type="button" id="btns" onclick="location.href='signin'" class="btn btn-dark mb-2 py-3 px-4">Login</button>
+												{% endif%}	
+														
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="item">
+								<div class="work-wrap d-md-flex">
+									<div class="img order-md-last" style="background-image: url(../static/images/5143096.jpg);"></div>
+									<div class="text text-left text-lg-right p-4 px-xl-5 d-flex align-items-center">
+										<div class="desc w-100">
+											<h2 class="mb-4">Trading <br>Name</h2>
+											<p class="h5">Call: 987654321</p>
+											<p class="h5 mb-4">Email Address: email@info.com</p>
+											<div class="row justify-content-end">
+												<div class="col-xl-8">
+													<p style="color: white;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+												</div>
+											</div>
+											<p>
+												<div  class="btn btn-outline-dark mb-2 py-3 px-4">03</div>
+												{% if logged  %}
+												<button type="button" id="btns" onclick="location.href='my_idea'" class="btn btn-dark mb-2 py-3 px-4">My Ideas</button>
+												{% else%}
+												<button type="button" id="btns" onclick="location.href='signin'" class="btn btn-dark mb-2 py-3 px-4">Login</button>
+												{% endif%}
+																							
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="card-container">
+							<h3> <br>Trending Ideas</h3>
+						</div>
+					</div>
+		{% for trending in ideas_list %}
+		<div class="row" style="width: 100%;">
+          <div class="card" style="display: block; margin-left: auto; margin-right: auto;margin-bottom: 15px;" >
+            <div class="card-header">
+              <div class="row" >
+                <div class="card-notification">
+                  <i class="fa fa-stop" style="font-size:45px;width:3rem;"></i>
+                </div>
+                
+                <div class="card-name" style="width: 27rem;">
+                 <h5 style="padding: 8px;"><b>{{ trending.user_name }}</b></h3>
+                </div>
+                <div class="card-notification" style="padding: 5px;">
+                  <i class="fa fa-bell" style="font-size:24px"></i>
+                </div>
+              
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="row" >
+					<div class="card-details" style="width: 23rem;">
+						
+						<h5 class="card-title">{{ trending.idea_name }}</h5>
+					</div>
+					{% if logged  %}
+					<div class="card-button" >
+						<a onclick="" id="but" class="btn btn-primary">Join this idea</a>
+					</div>
+					{% else %}
+					<div class="card-button" >
+						<a href="signin" id="but" class="btn btn-primary">Join this idea</a>
+					</div>
+					{% endif  %}
+				</div>
+				<script>
+					
+					
+					var anchors = document.querySelectorAll('#but');
+					if(anchors.innerText=="Joined"){
+						
+					}
+					else{
+						for (var i=0; i<anchors.length; i++) {
+							anchors[i].addEventListener('click', handler, false);
+						}
+						function handler() {
+							
+							this.innerText="Joined"
+							this.style.background = '#e5e5e5';
+							this.style.color = '#606060';
+							
+
+						}
+					}
+					/*
+					
+					var sub = document.querySelectorAll('#but');
+					
+					for (var i=0; i<sub.length; i++) {
+						sub.addEventListener('click', function() {
+						sub.textContent = "Joined";
+						sub.style.background = '#e5e5e5';
+						sub.style.color = '#606060';
+				
+					});
+
+					}
+					*/
+				</script>
+				<div class="row" >
+					<p class="card-text">for {{ trending.trade_type }}</p>
+					
+				</div>
+				<div class="row" >
+					{% if trending.risk == 'High' %}
+					<div class="p-0 mb-2 bg-danger text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+					{% elif trending.risk == 'Medium' %}
+					<div class="p-0 mb-2 bg-warning text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+					{% else %}
+				  	<div class="p-0 mb-2 bg-success text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+					{% endif %}
+				</div>
+				<div class="row" >
+					<div style="width: 25rem;">
+						<h6>Enter below</h6>
+						<h6>Book profit near</h6>
+						<h6>Stoploss at</h6>
+					 </div>
+					 <div>
+						<h6>$ 8000</h6>
+						<h6>$ {{ trending.target }}</h6>
+						<h6>$ {{ trending.stoploss }}</h6>
+					 
+					 </div>
+				  
+				</div>
+
+
+				  
+                
+                
+               
+				  
+            </div>
+		  </div>
+		</div>
+		
+		  {% endfor %}
+		</section>
+
+			{% if logged  %}
+			<a onclick="openForm()" id="fixedbutton" ><i class="fa fa-plus-square" style="font-size:50px;"></i></a>
+			{% endif%}
+			<div class="form-popup" id="myForm">
+				<form action="{% url 'add_idea' %}" method="POST" class="form-container">
+					{% csrf_token %}
+				  <h4><b> Create Trade Idea</b></h4>
+				  <div class="row" >
+				 
+					<div class="segmented-control">
+						<input type="radio" name="job" id="seg1" value="crypto" checked />
+						<label for="seg1">Crypto</label>
+						<input type="radio" name="job" id="seg2" value="Stocks" />
+						<label for="seg2">Stocks</label>
+					 </div>
+				  </div>
+
+
+
+				  <input type="text" placeholder="Name Your Idea" name="idea" required="">>
+				  <label class="upgrade" style="color: green;" >5% Upgrade</label>
+				  <select name="crypto" id="cars" required>
+					<option value="">Select your crypto</option>
+					<option value="Bitcoin">Bitcoin</option>
+					<option value="Ethereum">Ethereum</option>
+					<option value="Tether">Tether</option>
+				  </select>
+				  <select name="risk" id="cars" required="">
+					<option value="">Select Risk</option>
+					<option value="Low">Low</option>
+					<option value="Medium">Medium</option>
+					<option value="High">High</option>
+				  </select>
+				  
+				 
+					<input type="number" placeholder="Target" name="target" required autocomplete="off">
+
+			
+					<input type="number" placeholder="Stoploss" name="loss" required autocomplete="off">
+
+				  
+				  <p align="right">
+				  <button type="button" class="btn cancel" onclick="closeForm()" >Close</button>
+				  <button type="submit" class="btn btn-primary">Create</button>
+					</p>
+			</form>
+			</div>
+			{% if error %}
+			<div >
+			  <script>
+				alert('{{ error }}');
+			</script>
+			</div>				  
+			{% endif %} 
+			<!--
+			<div class="form-popup" id="mylog">
+
+				<form action="{% url 'log' %}" method="POST" id="logform" class="form-container">
+					{% csrf_token %}
+				  <h4><b> Login</b></h4>
+				  <div class="row" >
+				  <br>
+				  {% if error %}
+				  <div >
+					<script>
+					  alert('{{ error }}');
+				  </script>
+				  </div>				  
+				  {% endif %} 
+				  
+				  &emsp;<input type="text" placeholder="Enter Useername" name="username" id="username" required>&emsp;
+				  </div>
+				  <div class="row" >
+					
+					&emsp;<input type="password" placeholder="Enter Password" name="psw" id="psw" required>&emsp;
+					</div>
+
+
+
+				  
+				 
+				  <button type="button" class="btn cancel" onclick="closelog()" >Close</button>
+				  <button type="submit" class="btn btn-primary">Login</button>
+					</p>
+			</form>
+			</div>
+			-->
+			<script>
+				function openForm() {
+					document.getElementById("myForm").style.display = "block";
+					var element = document.getElementById("container");
+					element.classList.toggle("blur");
+					var x = document.getElementById("fixedbutton");
+					if (x.style.display === "none") {
+						x.style.display = "block";
+					} else {
+						x.style.display = "none";
+					}
+					
+				}
+				
+				function closeForm() {
+				  document.getElementById("myForm").style.display = "none";
+				  document.getElementById("fixedbutton").style.display = "block";
+				  var element = document.getElementById("container");
+				  element.classList.toggle("blur");
+				  
+				}
+				
+				/*
+				function openlog() {
+					document.getElementById("mylog").style.display = "block";
+					var element = document.getElementById("container");
+					document.querySelectorAll('#btns').forEach(el => el.setAttribute('disabled', true));
+
+					element.classList.toggle("blur");
+					
+					
+					
+				}
+				function closelog() {
+				  document.getElementById("mylog").style.display = "none";
+				  document.querySelectorAll('#btns').forEach(el => el.removeAttribute('disabled', true));
+				  var element = document.getElementById("container");
+				  element.classList.toggle("blur");
+				  
+				}
+
+				*/
+    
+					
+				
+
+						
+				  
+			</script>
+				
+			<style>
+			
+			
+			</style>
+			
+		
+		
+		
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

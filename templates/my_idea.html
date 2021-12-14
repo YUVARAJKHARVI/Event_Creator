@@ -1,0 +1,143 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+    <title>Login Form</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+
+      
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          
+          <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+
+              <h2 class="mb-5">My Ideas<br></h2>
+              {% for trending in ideas_list %}
+              {% if trending.user_name == 'yuva' %}
+              <div class="row" style="width: 100%;">
+                <div class="card" style="display: block; margin-left: auto; margin-right: auto;margin-bottom: 15px;" >
+                  <div class="card-header">
+                    <div class="row" >
+                      <div class="card-notification">
+                        <i class="fa fa-stop" style="font-size:45px;width:3rem;"></i>
+                      </div>
+                      
+                      <div class="card-name" style="width: 27rem;">
+                       <h5 style="padding: 8px;"><b>{{ trending.user_name }}</b></h3>
+                      </div>
+                      <div class="card-notification" style="padding: 5px;">
+                        <i class="fa fa-bell" style="font-size:24px"></i>
+                      </div>
+                    
+                    </div>
+                  </div>
+                  
+                  <div class="card-body">
+                    <div class="row" >
+                          <div class="card-details" style="width: 23rem;">
+                              
+                              <h5 class="card-title">{{ trending.idea_name }}</h5>
+                          </div>
+                         
+                          <div class="card-button" >
+                              <a style="background-color: blue;height: 40px;" onclick="" id="but" class="btn btn-primary">1 added</a>
+                          </div>
+                          
+                      </div>
+                      <script>
+                          
+                          
+                         
+                      </script>
+                      <div class="row" >
+                          <p class="card-text">for {{ trending.trade_type }}</p>
+                          
+                      </div>
+                      <div class="row" >
+                          
+                        {% if trending.risk == 'High' %}
+                        <div class="p-0 mb-2 bg-danger text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+                        {% elif trending.risk == 'Medium' %}
+                        <div class="p-0 mb-2 bg-warning text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+                        {% else %}
+                          <div class="p-0 mb-2 bg-success text-white text-center" style="width: 6rem;border-radius: 17px;font-size: 0.9rem;">{{ trending.risk }}</div>
+                        {% endif %}                          
+                      </div>
+                      <div class="row" >
+                          <div style="width: 25rem;">
+                              <h6>Enter below</h6>
+                              <h6>Book profit near</h6>
+                              <h6>Stoploss at</h6>
+                           </div>
+                           <div>
+                              <h6>{{ trending.risk }}</h6>
+                              <h6>{{ trending.target }}</h6>
+                              <h6>{{ trending.stoploss }}</h6>
+                           
+                           </div>
+                        
+                      </div>
+      
+      
+                        
+                      
+                      
+                     
+                        
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+
+
+          
+                <div class="row">
+                  <div class="col-md-12">
+                    <input onclick="location.href='javascript: history.go(-1)'" type="button" value="home" class="btn btn-primary rounded-0 py-2 px-4">
+
+                    <span class="submitting"></span>
+                  </div>
+                </div>
+              
+              {% if error %}
+              <div >
+              <script>
+                alert('{{ error }}');
+              </script>
+              </div>				  
+              {% endif %}  
+             
+                
+
+            </div>
+            
+          </div>
+        </div>  
+        </div>
+      </div>
+  </div>
+    
+    
+
+   
+  </body>
+</html>

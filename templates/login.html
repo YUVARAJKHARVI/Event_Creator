@@ -1,0 +1,78 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+    <title>Login Form</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+
+      
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          
+          <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+
+              <h2 class="mb-5">LOGIN<br></h2>
+
+              <form class="border-right pr-5 mb-5" action="{% url 'log' %}" method="POST"  id="contactForm" name="contactForm">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <input type="text" class="form-control" name="username" id="fname" placeholder="Username" autocomplete="off" required>
+                  </div>
+                </div>  
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <input type="password" class="form-control" name="psw" id="psw" placeholder="Password" required >
+                  </div>
+                </div>
+          
+                <div class="row">
+                  <div class="col-md-12">
+                    <input type="submit" value="Submit" class="btn btn-primary rounded-0 py-2 px-4">
+                    <input onclick="location.href='javascript: history.go(-1)'" type="button" value="home" class="btn btn-primary rounded-0 py-2 px-4">
+
+                    <span class="submitting"></span>
+                  </div>
+                </div>
+              </form>
+              {% if error %}
+              <div >
+              <script>
+                alert('{{ error }}');
+              </script>
+              </div>				  
+              {% endif %}  
+             
+                
+
+            </div>
+            
+          </div>
+        </div>  
+        </div>
+      </div>
+  </div>
+    
+    
+
+   
+  </body>
+</html>

@@ -1,0 +1,869 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <title>Calendar</title>
+</head>
+
+<body>
+  <div class="content">
+    <div class="container" id="container">
+      <div class="row">
+
+        {% if update_event.event_id %}
+        <div class="col-8">
+
+          <h2 class="mb-5" style="font-size: 1.5rem;font-weight: 400; ">Hello, {{ user.username }}<br></h2>
+        
+        <form class="col-md-auto" action="" method="POST">
+          {% csrf_token %}
+        <div id="update_form" >
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <input type="text" class="form-control" name="u_title" id="title" placeholder="{{update_event.title}}"
+                autocomplete="off" >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <input type="text" class="form-control" name="u_desc" id="desc" placeholder="{{update_event.description}}"
+                autocomplete="off" >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <input type="text" class="form-control" name="u_start1" id="start1" placeholder="{{update_event.start_time}}"
+                autocomplete="off" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <input type="text" class="form-control" name="u_end1" id="end1" placeholder="{{update_event.end_time}}"
+                autocomplete="off" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <select name="u_attendee" id="cars" >
+                <option value="{{update_event.attendee_name}}">{{update_event.attendee_name}}</option>
+                <option value="Yuvaraj">Yuvaraj</option>
+                <option value="Kiran">Kiran</option>
+                <option value="Manoj">Manoj</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <select name="u_attendee_mail" id='attendee_mail'>
+                <option value="{{update_event.attendee_email}}">{{update_event.attendee_email}}</option>
+                <option value="Yuvaraj@gmail.com">Yuvaraj@gmail.com</option>
+                <option value="Kiran@gmail.com">Kiran@gmail.com</option>
+                <option value="Manoj@gmail.com">Manoj@gmail.com</option>
+              </select>
+
+            </div>
+          </div><!--
+          <div class="row">
+            <div class="col-md-14 form-group">
+              <select name="petsAllowed" id='petsAllowed'>
+                <option value="">--Pets are Allowed--</option>
+                <option value=1>Yes</option>
+                <option value=0>No</option>
+              </select>
+              <select name="formaldressCode" id='formaldressCode'>
+                <option value="">--Formal dress code--</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+             
+            </div>
+          </div>-->
+          <div class="row">
+            <div class="col-md-14 form-group">
+              Pets are Allowed
+              <label>
+                <input name="petsAllowed" onclick="$(this).val(this.checked ? 1 : 0)" type="checkbox" id="petsAllowed">
+                Yes?
+              </label><br>
+              Formal dress code
+              <label>
+                <input onclick="$(this).val(this.checked ? 1 : 0)" name="formaldressCode" type="checkbox" id="formaldressCode">
+                Yes?
+              </label>
+            </div>
+          </div>
+          <script>
+       
+          </script>     
+          
+         
+
+          <input type="hidden" id="event_id" name="event_id" value={{update_event.event_id}}>
+
+          <div class="row">
+            <div class="col-2">
+              <input type="submit" id='update' name='update' value="Save"
+                class="btn btn-primary rounded-0 py-2 px-4">
+            </div>
+            <div class="col-4">
+              <input type="button" id='back' onclick="location.href='javascript: history.go(-1)'" name='back' value="Back"
+                class="btn btn-primary rounded-0 py-2 px-4">
+            </div>
+          </div>
+
+        </div>
+        </form>
+        <script>
+          
+          var st1 = document.getElementById('start1')
+          var en1 = document.getElementById('end1')
+
+          
+          st1.onfocus = function (event) {
+            this.type = 'datetime-local';
+            this.step = "1";
+            this.focus();
+          }
+
+          
+          en1.onfocus = function (event) {
+            this.type = 'datetime-local';
+            this.step = "1";
+            this.focus();
+          }
+
+
+        </script>
+        {% else %}
+
+
+
+        <div class="col-10">
+          <div class="row">
+
+            <div class="col-6">
+
+              <h2 class="mb-5" style="font-size: 1.5rem;font-weight: 400; ">Hello, {{ user.username }}<br></h2>
+            </div>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser == True %}
+            <form method="POST">
+              {% csrf_token %}
+              <input type="text" id="search" name="search" placeholder="Search.." autocomplete="off">
+              <button type="submit" class='card_but pull-right' id="search_icon"  name='search_icon' ><i class="fa fa-search fa-lg"></i></button>
+            </form>
+            {% endif %}
+            <style> 
+            
+              #search {
+                width: 130px;
+                height: 50px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+                background-repeat: no-repeat;
+                padding: 12px 15px 12px 8px;
+                -webkit-transition: width 0.4s ease-in-out;
+                transition: width 0.4s ease-in-out;
+              }
+              
+             
+              </style>
+            <div class="col-2">
+              <input type="submit" name='logout' value="Logout" onclick="location.href='/sign_out';"
+                class="btn rounded-0 py-2 px-4 ">
+            </div>
+            {% else %}
+            <div class="row">
+              <div class="col-6">
+                <input type="submit" onclick="location.href='/log_in'" name='Login' value="Login"
+                  class="btn btn-primary rounded-0 py-2 px-4">
+              </div>
+
+
+              <div class="col-6">
+                <input type="submit" onclick="location.href='/register';" name='register' value="Register"
+                  class="btn btn-primary rounded-0 py-2 px-4">
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <iframe
+            src="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showPrint=0&showTz=0&showTitle=0&src=eXV2YXJhamtoYXJ2aTQxMTFAZ21haWwuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=a2ptYmQ4dDE3dnJmcXR0Z3YyZWsydmVkb2dAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4tZ2IuaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%234285F4&color=%230B8043&color=%230B8043"
+            style="border-width:0;" width="900" height="700" frameborder="0" scrolling="no"></iframe>
+
+        </div>
+        
+
+        {% if user.is_authenticated %}
+
+        <div class="col-2">
+          <div class="row">
+            
+              <h2 class="mb-4" style="font-size: 2.5rem;font-weight: 500; ">Event List<br></h2>
+          
+            
+          </div>
+          {{ event_name }}
+          {% for ev in event %}
+          
+          {% if user.is_superuser == True %}
+         
+          <table>
+            <tr>
+              <td>
+               
+                 <div class="row mb-3">
+
+
+                  <div id="popup_main" class="popup_main">
+                    <button id="open_popup" class="open_popup">{{ev.title}}</button>
+                    <div id="popup_body" class="popup_body">
+                      <div id="popup_back" class="popup_back"></div>
+                      <div id="popup_contain" class="popup_contain">
+                        <div id="popup_close" class="popup_close">x</div>
+                        <div class="col">
+                          <button  class='card_but pull-right' name='delete' onclick="location.href='/calendar/{{ev.event_id}}';"><i class="fa fa-trash"></i></button>
+                          <button  class='card_but pull-right' name='update' onclick="location.href='/calendar/update/{{ev.event_id}}';"><i class="fa fa-pencil-square-o"></i></button>
+                        </div>
+                        <div class="wrapper">
+                          
+                          <h2 class="upper"><b>{{ev.title}}</b></h2>
+                          
+                          <h3 class="group">{{ev.description}}</h3>
+                          <p class="details">
+                            <span class="row">
+                              <i class="fa fa-user fa-2x"></i>
+                              <span class="row-item">
+                                <strong>{{ev.attendee_name}}</strong>
+                              </span>
+                              
+                            </span>
+                            <span class="row">
+                              <i class="fa fa-calendar fa-2x"></i>
+                              <span class="row-item">
+                                <time>{{ev.start_time}}   To</time>
+                              </span>
+                              <span class="row-item">
+                                <time>{{ev.end_time}}</time>
+                              </span>
+                            </span>
+                            <span class="row">
+                              <i class="fa fa-envelope  icon fa-2x"></i>
+                              <span class="row-item">
+                              {{ev.attendee_email}}
+                              
+                              </span>
+                            </span>
+                            <span class="row">
+                              <img src="https://img.icons8.com/ios-glyphs/30/000000/dog.png"/>
+
+                              <span class="row-item">
+                              Pets are Allowed: {% if ev.petsAllowed == True %}Yes &emsp;{% else %}No &emsp;{% endif %}
+                             
+                              </span>
+                              <img src="https://img.icons8.com/material/24/000000/shirt.png"/>
+
+
+                              <span class="row-item">
+                              Formal Dress Code: {% if ev.formaldressCode == True %}Yes{% else %}No{% endif %}
+                              
+                              
+                              </span>
+                            </span>
+
+                          </p>
+                        </div>
+                        
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+          
+
+              </td>
+            </tr>
+          </table>
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!--
+                        <div class="row">
+
+                          <div class="segmented-control">
+
+                            <input type="radio" name="job" id="seg2" onclick="yesnoCheck()" value="update" />
+                            <label for="seg2">Update</label>
+                            <input type="radio" name="job" id="seg3" onclick="yesnoCheck()" value="delete" checked />
+                            <label for="seg3">Delete</label>
+
+                          </div>
+
+                        </div>
+                        
+                        <div class="col">
+                          
+                          <form class="col-md-auto" action="" method="POST">
+                            {% csrf_token %}
+                            <div id="updating_form" style="display: block;">
+
+
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="new_title" id="new_title"
+                                    placeholder="Title" autocomplete="off">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="new_desc" id="new_desc"
+                                    placeholder="Description" autocomplete="off">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="u_start" id="start1"
+                                    placeholder="Start Time" autocomplete="off">
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="u_end" id="end1" placeholder="End Time"
+                                    autocomplete="off">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <input type="submit" id='up' name='update' value="Update"
+                                    class="btn btn-primary rounded-0 py-2 px-4">
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                          <form class="col-md-auto" action="" method="POST">
+                            {% csrf_token %}
+                            <div id="deleting_form" style="display: none;">
+
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="d_title" id="title" placeholder="Title"
+                                    autocomplete="off" required>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-14 form-group">
+                                  <input type="text" class="form-control" name="d_desc" id="desc"
+                                    placeholder="Event Description" autocomplete="off" required>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <input type="submit" id='del' name='delete' value="Delete"
+                                    class="btn btn-primary rounded-0 py-2 px-4">
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        -->
+                      
+
+
+
+
+
+
+          {% elif ev.attendee_email == user.email %}
+
+          <table>
+            <tr>
+              <td>
+               
+                 <div class="row mb-3">
+
+
+                  <div id="popup_main" class="popup_main">
+                    <button id="open_popup" class="open_popup">{{ev.title}}</button>
+                    <div id="popup_body" class="popup_body">
+                      <div id="popup_back" class="popup_back"></div>
+                      <div id="popup_contain" class="popup_contain">
+                        <div id="popup_close" class="popup_close">x</div>
+                        
+                        <div class="wrapper">
+                          
+                          <h2 class="upper"><b>{{ev.title}}</b></h2>
+                          
+                          <h3 class="group">{{ev.description}}</h3>
+                          <p class="details">
+                            <span class="row">
+                              <i class="fa fa-user fa-2x"></i>
+                              <span class="row-item">
+                                <strong>{{ev.attendee_name}}</strong>
+                              </span>
+                              
+                            </span>
+                            <span class="row">
+                              <i class="fa fa-calendar fa-2x"></i>
+                              <span class="row-item">
+                                <time>{{ev.start_time}}   To</time>
+                              </span>
+                              <span class="row-item">
+                                <time>{{ev.end_time}}</time>
+                              </span>
+                            </span>
+                            <span class="row">
+                              <i class="fa fa-envelope  icon fa-2x"></i>
+                              <span class="row-item">
+                              {{ev.attendee_email}}
+                              
+                              </span>
+                            </span>
+
+                          </p>
+                        </div>
+                        
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+          
+
+              </td>
+            </tr>
+          </table>
+
+
+         
+
+
+
+
+         
+         
+          {% endif %}
+          {% endfor %}
+
+          
+          
+          <script>
+
+
+                          
+            $(".open_popup").click(function () {
+              $(this).parent(".popup_main").children(".popup_body").addClass("popup_body_show");
+            });
+            
+            $(".popup_close").click(function () {
+              $(".popup_body").removeClass("popup_body_show");
+            });
+            $(".popup_back").click(function () {
+              $(".popup_body").removeClass("popup_body_show");
+            });
+
+          </script>
+          <style>
+            #open_popup {
+              transition: all .5s ease;
+              color: rgb(8, 8, 8);
+
+              font-family: 'Montserrat', sans-serif;
+              text-transform: uppercase;
+              text-align: center;
+              line-height: 1;
+              font-size: 17px;
+              width: 100%;
+              background-color: transparent;
+              padding: 10px;
+              outline: none;
+              border-radius: 4px;
+
+              border: none;
+
+
+            }
+
+            #popup_body {
+              display: none;
+              position: fixed;
+              width: 600px;
+              height: 200px;
+              left: 50%;
+              top: 0%;
+              margin-left: -170px; /*half the width*/
+              border: rgb(12, 11, 11);
+              -webkit-transition: 300ms;
+              -moz-transition: 300ms;
+              -o-transition: 300ms;
+              -ms-transition: 300ms;
+              transition: 300ms;
+
+            }
+
+            #popup_body.popup_body_show {
+              display: block;
+
+            }
+
+            #popup_back {
+              background: rgba(0, 0, 0, 0);
+              position: fixed;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+            }
+
+            #popup_contain {
+              box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+              position: relative;
+              background: #fff;
+              min-width: 300px;
+              max-width: 80%;
+              margin: 100px auto 50px;
+              min-height: 150px;
+              padding: 10px 20px;
+            }
+
+            #popup_close {
+              background: #fff;
+              padding: 3px 10px 5px;
+              position: absolute;
+              right: -10px;
+              top: -10px;
+              color: rgb(2, 2, 2);
+              border-radius: 50%;
+            }
+          </style>
+
+        </div>
+        {% endif %}
+
+        <div class="col-4">
+
+
+
+
+
+
+
+
+
+
+          {% if user.is_authenticated %}
+          {% if user.is_superuser == True %}
+          <!--
+              
+
+              <iframe src="calendar.html" name="iframe_a" height="100px" width="100%" title="Iframe Example"></iframe>-->
+          <a onclick="openForm()" id="fixedbutton">
+            <h2 style="font-size: 1.5rem;font-weight: 600; color: blue;">Create Event +</h2>
+          </a>
+          <div class="form-popup" id="myForm"
+            style="box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);">
+
+
+
+
+
+            <div class="row">
+              <div class="col">
+                <div class="segmented-control">
+                  <input type="radio" name="job" onclick="yesnoCheck()" id="seg1" value="create" checked />
+                  <label for="seg1">
+                    <h2 class="mb-2" style="font-size: 1.5rem;font-weight: 600; ">Create Event<br></h2>
+                  </label>
+                  <!--
+              <input type="radio" name="job" id="seg2" onclick="yesnoCheck()" value="update" />
+              <label for="seg2">Update</label>
+              <input type="radio" name="job" id="seg3" onclick="yesnoCheck()" value="delete" />
+              <label for="seg3">Delete</label>
+              -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <form class="col-md-auto" action="" method="POST">
+                {% csrf_token %}
+                <div id="create_form" style="display: block;">
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <input type="text" class="form-control" name="title" id="title" placeholder="Title"
+                        autocomplete="off" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <input type="text" class="form-control" name="desc" id="desc" placeholder="Description"
+                        autocomplete="off" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <input type="text" class="form-control" name="start" id="start" placeholder="Start Time"
+                        autocomplete="off" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <input type="text" class="form-control" name="end" id="end" placeholder="End Time"
+                        autocomplete="off" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <select name="attendee" id="cars" required>
+                        <option value="">Select Attendee</option>
+                        <option value="Yuvaraj">Yuvaraj</option>
+                        <option value="Kiran">Kiran</option>
+                        <option value="Manoj">Manoj</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-14 form-group">
+                      <select name="attendee_mail" id='attendee_mail' required>
+                        <option value="">Select Attendee Email</option>
+                        <option value="Yuvaraj@gmail.com">Yuvaraj@gmail.com</option>
+                        <option value="Kiran@gmail.com">Kiran@gmail.com</option>
+                        <option value="Manoj@gmail.com">Manoj@gmail.com</option>
+                      </select>
+
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col">
+                      <input type="submit" id='cre' name='create' value="Create"
+                        class="btn btn-primary rounded-0 py-2 px-4">
+                    </div>
+                    <div class="col">
+                      <input type="submit" id='close' onclick="closeForm()" name='close' value="Close"
+                        class="btn btn-primary rounded-0 py-2 px-4">
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <!--
+          <form class="col-md-auto" action="" method="POST">
+            {% csrf_token %}
+            <div id="updating_form" style="display: none;">
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="u_title" id="title" placeholder="Event Title"
+                    autocomplete="off" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="u_desc" id="desc" placeholder="Event Description"
+                    autocomplete="off" required>
+                </div>
+              </div>
+              <p style="color: rgb(5, 0, 0);font-size: large;">Edit Event</p>
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="new_title" id="new_title" placeholder="Title"
+                    autocomplete="off">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="new_desc" id="new_desc" placeholder="Description"
+                    autocomplete="off">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="u_start" id="start1" placeholder="Start Time"
+                    autocomplete="off">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="u_end" id="end1" placeholder="End Time"
+                    autocomplete="off">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <input type="submit" id='up' name='update' value="Update" class="btn btn-primary rounded-0 py-2 px-4">
+                </div>
+              </div>
+            </div>
+          </form>
+          <form class="col-md-auto" action="" method="POST">
+            {% csrf_token %}
+            <div id="deleting_form" style="display: none;">
+
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="d_title" id="title" placeholder="Title"
+                    autocomplete="off" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-14 form-group">
+                  <input type="text" class="form-control" name="d_desc" id="desc" placeholder="Event Description"
+                    autocomplete="off" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <input type="submit" id='del' name='delete' value="Delete"
+                    class="btn btn-primary rounded-0 py-2 px-4">
+                </div>
+              </div>
+
+
+            </div>
+          </form>
+-->
+            {% endif %}
+
+            {% endif %}
+          </div>
+
+          <!---->
+
+
+        </div>
+        {% if messages %}
+        {% for messages in messages %}
+        <div>
+          <script>
+            alert('{{ messages }}');
+          </script>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <script type="text/javascript">
+
+
+          var st = document.getElementById('start')
+          var en = document.getElementById('end')
+          var st1 = document.getElementById('start1')
+          var en1 = document.getElementById('end1')
+
+          st.onfocus = function (event) {
+            this.type = 'datetime-local';
+            this.step = "1";
+            this.focus();
+          }
+          
+          en.onfocus = function (event) {
+            this.type = 'datetime-local';
+            this.step = "1";
+            this.focus();
+          }
+          
+
+
+
+          function openForm() {
+
+            document.getElementById("myForm").style.display = "block";
+
+            var x = document.getElementById("fixedbutton");
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+
+          }
+
+          function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+            document.getElementById("fixedbutton").style.display = "block";
+
+
+          }
+          function yesnoCheck() {
+
+            if (document.getElementById('seg2').checked) {
+              document.getElementById('updating_form').style.display = 'block';
+              document.getElementById('deleting_form').style.display = 'none';
+
+
+            }
+            else if (document.getElementById('seg3').checked) {
+              document.getElementById('deleting_form').style.display = 'block';
+              document.getElementById('updating_form').style.display = 'none';
+
+
+            } else {
+              document.getElementById('updating_form').style.display = 'none';
+              document.getElementById('create_form').style.display = 'none';
+              document.getElementById('deleting_form').style.display = 'none';
+
+
+            }
+          }
+        </script>
+
+        <!---->
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
