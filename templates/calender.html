@@ -81,22 +81,7 @@
               </select>
 
             </div>
-          </div><!--
-          <div class="row">
-            <div class="col-md-14 form-group">
-              <select name="petsAllowed" id='petsAllowed'>
-                <option value="">--Pets are Allowed--</option>
-                <option value=1>Yes</option>
-                <option value=0>No</option>
-              </select>
-              <select name="formaldressCode" id='formaldressCode'>
-                <option value="">--Formal dress code--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-              </select>
-             
-            </div>
-          </div>-->
+          </div>
           <div class="row">
             <div class="col-md-14 form-group">
               Pets are Allowed
@@ -308,113 +293,6 @@
             </tr>
           </table>
 
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!--
-                        <div class="row">
-
-                          <div class="segmented-control">
-
-                            <input type="radio" name="job" id="seg2" onclick="yesnoCheck()" value="update" />
-                            <label for="seg2">Update</label>
-                            <input type="radio" name="job" id="seg3" onclick="yesnoCheck()" value="delete" checked />
-                            <label for="seg3">Delete</label>
-
-                          </div>
-
-                        </div>
-                        
-                        <div class="col">
-                          
-                          <form class="col-md-auto" action="" method="POST">
-                            {% csrf_token %}
-                            <div id="updating_form" style="display: block;">
-
-
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="new_title" id="new_title"
-                                    placeholder="Title" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="new_desc" id="new_desc"
-                                    placeholder="Description" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="u_start" id="start1"
-                                    placeholder="Start Time" autocomplete="off">
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="u_end" id="end1" placeholder="End Time"
-                                    autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <input type="submit" id='up' name='update' value="Update"
-                                    class="btn btn-primary rounded-0 py-2 px-4">
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                          <form class="col-md-auto" action="" method="POST">
-                            {% csrf_token %}
-                            <div id="deleting_form" style="display: none;">
-
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="d_title" id="title" placeholder="Title"
-                                    autocomplete="off" required>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-14 form-group">
-                                  <input type="text" class="form-control" name="d_desc" id="desc"
-                                    placeholder="Event Description" autocomplete="off" required>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <input type="submit" id='del' name='delete' value="Delete"
-                                    class="btn btn-primary rounded-0 py-2 px-4">
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        -->
-                      
-
-
-
-
-
-
           {% elif ev.attendee_email == user.email %}
 
           <table>
@@ -474,20 +352,10 @@
               </td>
             </tr>
           </table>
-
-
-         
-
-
-
-
-         
-         
+ 
           {% endif %}
           {% endfor %}
-
-          
-          
+   
           <script>
 
 
@@ -585,28 +453,14 @@
 
 
 
-
-
-
-
-
-
-
           {% if user.is_authenticated %}
           {% if user.is_superuser == True %}
-          <!--
-              
 
-              <iframe src="calendar.html" name="iframe_a" height="100px" width="100%" title="Iframe Example"></iframe>-->
           <a onclick="openForm()" id="fixedbutton">
             <h2 style="font-size: 1.5rem;font-weight: 600; color: blue;">Create Event +</h2>
           </a>
           <div class="form-popup" id="myForm"
             style="box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);">
-
-
-
-
 
             <div class="row">
               <div class="col">
@@ -615,12 +469,7 @@
                   <label for="seg1">
                     <h2 class="mb-2" style="font-size: 1.5rem;font-weight: 600; ">Create Event<br></h2>
                   </label>
-                  <!--
-              <input type="radio" name="job" id="seg2" onclick="yesnoCheck()" value="update" />
-              <label for="seg2">Update</label>
-              <input type="radio" name="job" id="seg3" onclick="yesnoCheck()" value="delete" />
-              <label for="seg3">Delete</label>
-              -->
+                  
                 </div>
               </div>
             </div>
@@ -691,89 +540,11 @@
                 </div>
               </form>
             </div>
-            <!--
-          <form class="col-md-auto" action="" method="POST">
-            {% csrf_token %}
-            <div id="updating_form" style="display: none;">
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="u_title" id="title" placeholder="Event Title"
-                    autocomplete="off" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="u_desc" id="desc" placeholder="Event Description"
-                    autocomplete="off" required>
-                </div>
-              </div>
-              <p style="color: rgb(5, 0, 0);font-size: large;">Edit Event</p>
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="new_title" id="new_title" placeholder="Title"
-                    autocomplete="off">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="new_desc" id="new_desc" placeholder="Description"
-                    autocomplete="off">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="u_start" id="start1" placeholder="Start Time"
-                    autocomplete="off">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="u_end" id="end1" placeholder="End Time"
-                    autocomplete="off">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <input type="submit" id='up' name='update' value="Update" class="btn btn-primary rounded-0 py-2 px-4">
-                </div>
-              </div>
-            </div>
-          </form>
-          <form class="col-md-auto" action="" method="POST">
-            {% csrf_token %}
-            <div id="deleting_form" style="display: none;">
-
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="d_title" id="title" placeholder="Title"
-                    autocomplete="off" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-14 form-group">
-                  <input type="text" class="form-control" name="d_desc" id="desc" placeholder="Event Description"
-                    autocomplete="off" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <input type="submit" id='del' name='delete' value="Delete"
-                    class="btn btn-primary rounded-0 py-2 px-4">
-                </div>
-              </div>
-
-
-            </div>
-          </form>
--->
+           
             {% endif %}
 
             {% endif %}
           </div>
-
-          <!---->
-
 
         </div>
         {% if messages %}
@@ -851,18 +622,12 @@
           }
         </script>
 
-        <!---->
+
         {% endif %}
       </div>
     </div>
 
   </div>
-
-
-
-
-
-
 
 </body>
 

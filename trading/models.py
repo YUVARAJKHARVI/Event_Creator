@@ -67,37 +67,3 @@ class event_list(models.Model):
     class Meta:
         db_table="event_list"
 
-
-'''
-class events(models.Model):
-    event_id=models.CharField(max_length=255)
-    title=models.CharField(max_length=255)
-    description=models.CharField(max_length=255)
-    html_link=models.CharField(max_length=255)
-    created_time=models.DateTimeField(auto_now_add=True, blank=True)
-    updated_time=models.DateTimeField(blank=True)
-    start=models.CharField(max_length=255)
-    end=models.CharField(max_length=255)
-    attendees = models.JSONField()
-    
-    class Meta:
-        db_table="event"
-
-class new_events(models.Model):
-    event_id=models.CharField(max_length=255)
-    title=models.CharField(max_length=255)
-    description=models.CharField(max_length=255)
-    html_link=models.CharField(max_length=255)
-    created_time=models.DateTimeField(auto_now_add=True, blank=True)
-    updated_time=models.DateTimeField(blank=True)
-    start=models.CharField(max_length=255)
-    end=models.CharField(max_length=255)
-    attendees = models.JSONField()
-    
-    class Meta:
-        db_table="new_events"
-'''
-
-
-    
-   

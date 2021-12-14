@@ -13,10 +13,7 @@ urlpatterns = [
     #path('search/',views.youtube_search, name="search"),
     path('calendar/<delete_event_id>/',views.delete_event, name="delete_event"),
     path('calendar/update/<update_event_id>/',views.update_event, name="update_event"),
-
     path('calendar/',views.calender_view, name="calender"),
-    ##
-
     path('calendar/my_events/',views.my_events, name="my_events"),
     path('log_in/',views.log_in, name="log_in"),
     path('sign_out/',views.sign_out, name="sign_out"),

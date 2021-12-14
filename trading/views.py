@@ -2,9 +2,6 @@
 from django.shortcuts import render,redirect
 
 from .models import ideas,event_list
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm, AuthenticationForm
-
 
 ###########
 from django.contrib.auth.models import User
@@ -140,25 +137,9 @@ def calender_view(request):
             
             result=(response)
             event_id=result['id']
-            #event_saving=events_list.objects.create(event_id=event_id)
-            #event_saving.save()
+            
             print(result)
-            '''
-            page_token = None
-            while True:
-                events = service.events().list(calendarId='primary',q= "status ='confirmed'").execute()
-                for event in events['items']:
-                    print (event['summary'])
-                page_token = events.get('nextPageToken')
-                if not page_token:
-                    break
-                
-            
-            page_token=None
-            list1 = service.events().list(calendarId='primary',q= "status ='confirmed'").execute()
-            print(list1)
-            '''
-            
+           
            
            
             if(event_id!=None):
@@ -188,110 +169,7 @@ def calender_view(request):
             event=event_list.objects.all().filter(attendee_name=search)
             return render(request,'calender.html',{'event':event})
             
-            '''
-        if 'update' in request.POST:
-            try:
-                update_event_id=request.POST['event_id']
-                title=request.POST['u_title']
-                descr=request.POST['u_desc']
-                start=request.POST['u_start1']
-                end=request.POST['u_end1']
-                u_attendee=request.POST['u_attendee']
-                u_attendee_mail=request.POST['u_attendee_mail']
-                email=request.user.email
-            
-                event_obj=event_list.objects.get()
-            
-                if descr == '':
-                    descr=event_obj.description
-                if title == '':
-                    title=event_obj.title
-                if start == '':
-                    start=event_obj.start_time
-                if end == '':
-                    end=event_obj.end_time
-                
-                
-                result = service.events().get(calendarId=calendarId,eventId=update_event_id).execute()
-                result['summary']=title
-                result['description']=descr
-                result['start']['dateTime']=start
-                print(end)
-                result['end']['dateTime']=end
-                result['attendees'][0]['displayName']=u_attendee
-                result['attendees'][0]['email']=u_attendee_mail
-                print(result['end']['dateTime'])
-                service.events().update(calendarId=calendarId,eventId=update_event_id,body=result).execute()
-                event_obj.title=title
-                event_obj.description=descr
-                event_obj.attendee_email=u_attendee_mail
-                event_obj.attendee_name=u_attendee
-                event_obj.start_time=start
-                event_obj.end_time=end
-
-                event_obj.save()
-                messages.info(request, 'Event Updated :)') 
-                return redirect(calender_view)
-                
-            except event_list.DoesNotExist:
-                messages.info(request, 'Enter a valid event :(') 
-                return redirect(calender_view)
-
-       
-        if 'delete' in request.POST:
-            try:
-                title=request.POST['d_title']
-                descr=request.POST['d_desc']
-                event_obj=event_list.objects.get(title=title,description=descr)
-            
-                event_id_number=event_obj.event_id
-
-                service.events().delete(calendarId=calendarId,eventId=event_id_number).execute()
-                event_obj.delete()
-                messages.info(request, 'Event Deleted :)') 
-                return redirect(calender_view)
-            except event_list.DoesNotExist:
-                messages.info(request, 'Enter a valid event :(') 
-                return redirect(calender_view)
-    
-    if request.method =='POST':
-        page_token = None
-        while True:
-            events = service.events().list(calendarId=calendarId, pageToken=page_token,q= "yuvaraj@gmail.com").execute()
-            titles=[]
-            descs=[]
-            links=[]
-            for ev in events['items']:
-                title=ev['summary']
-                desc=ev['description']
-                html_link=ev['htmlLink']
-                titles.append(title)
-                descs.append(desc)
-                links.append(html_link)
-            page_token = events.get('nextPageToken')
-            print(links)
-            if not page_token:
-                break
-            context={
-                'titles':titles,
-                'descs':descs,
-                'links':links
-            }
-            return render(request,'calender.html',{'titles':'titles'})
-    '''
-    '''
-    event=None
-    try:
-        email=request.user.email
-        if request.user.is_superuser == True:
-            event=event_list.objects.all()
-        else:
-            event=event_list.objects.get(attendee_email=email)
-    except event_list.DoesNotExist:
-        event=None
-    except AttributeError:
-        email=None
-    '''
+           
     event=event_list.objects.all()
     return render(request,'calender.html',{'event':event})
 
@@ -419,17 +297,6 @@ def my_events(request):
     return render(request,'calender.html',{'cards':cards})
 
 
-    '''
-    {'kind': 'calendar#event', 'etag': '"3278040272818000"', 
-    'id': '0fif0u8m4tq7hbejilumh9vt8c', 'status': 'confirmed', 'htmlLink': 'https://www.google.com/calendar/event?eid=MGZpZjB1OG00dHE3aGJlamlsdW1oOXZ0OGMga2ptYmQ4dDE3dnJmcXR0Z3YyZWsydmVkb2dAZw',
-     'created': '2021-12-09T03:22:16.000Z', 
-    'updated': '2021-12-09T03:22:16.409Z', 'summary': 'Google go', 'description': "A chance to hear more about Google's developer products.",
-     'creator': {'email': 'yuvarajkharvi4111@gmail.com'}, 'organizer': {'email': 'kjmbd8t17vrfqttgv2ek2vedog@group.calendar.google.com', 'displayName': 'My Calendar', 'self': True},
-      'start': {'dateTime': '2021-12-13T01:01:00Z', 'timeZone': 'Asia/Kolkata'}, 'end': {'dateTime': '2021-12-13T01:05:00Z', 'timeZone': 'Asia/Kolkata'}, 
-      'visibility': 'public', 'iCalUID': '0fif0u8m4tq7hbejilumh9vt8c@google.com', 'sequence': 0,
-       'attendees': [{'email': 'yuva@example.com', 'displayName': 'yuva', 'responseStatus': 'needsAction'}, {'email': 'yuvak@example.com', 'displayName': 'yuvak', 'responseStatus': 'needsAction'}], 
-       'reminders': {'useDefault': True}, 'eventType': 'default'}
-    '''
 
 ###########
 
